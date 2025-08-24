@@ -1,0 +1,4 @@
+title = "My Kairo Site"
+theme = "kairo-classic"
+output_dir = "public"
+vault_path = "."
