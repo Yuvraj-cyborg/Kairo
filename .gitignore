@@ -1,3 +1,4 @@
 target
-kairo-cli/.DS_Store
+/kairo-cli/.DS_Store
 .DS_Store
+/kairo-cli/public
