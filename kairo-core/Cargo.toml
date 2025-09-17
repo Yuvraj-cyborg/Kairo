@@ -8,3 +8,4 @@ anyhow = "1.0.99"
 serde = { version = "1.0.219", features = ["derive"] }
 toml = { version = "0.9.5", features = ["serde"] }
 walkdir = "2.5.0"
+pulldown-cmark = "0.9"

@@ -1,5 +1,5 @@
 use anyhow::Result;
-use clap::Parser;
+use clap::{Parser,Subcommand};
 
 #[derive(Parser)]
 struct Cli {
@@ -7,12 +7,13 @@ struct Cli {
     command: Command,
 }
 
-#[derive(Parser)]
+#[derive(Subcommand)]
 enum Command {
     Init { dir: Option<String> },
     Build,
     Serve,
     Deploy,
+    Mdcheck { dir: String },
 }
 
 fn main() -> Result<()> {
@@ -25,8 +26,15 @@ fn main() -> Result<()> {
             kairo_core::config::write_default_config(&path)?;
             println!("Wrote default config to {}", path.display());
         }
+        Command::Mdcheck { dir } => {
+            kairo_core::io::read_markdowns(dir);
+            println!("MdCheck succesfull");
+        }
         Command::Build => {
-            println!("Build succesfull");
+    let cfg_path = std::path::Path::new("kairo.toml");
+    let cfg = kairo_core::config::load_config(cfg_path)?;
+    kairo_core::build::build_site(&cfg)?;
+    println!("Build successful");
         }
         Command::Serve => {
             println!("Serving succesfull");
